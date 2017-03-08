@@ -23,7 +23,8 @@ define nerve::register (
       "fall"    => '2'
     }
   ],
-  $target        = "/etc/nerve/conf.d/${name}.json"
+  $labels        = {},
+  $target        = "/etc/nerve/conf.d/${name}.json",
 ) {
 
   include stdlib
@@ -34,6 +35,7 @@ define nerve::register (
   validate_array($zk_hosts)
   validate_string($check_interval)
   validate_array($checks)
+  validate_hash($labels)
   validate_absolute_path($target)
 
   file { $target:

@@ -1,8 +1,12 @@
+<% require "json" -%>
 {
   "port": <%= @port -%>,
   "host": "<%= @host -%>",
   "zk_hosts": <%= @zk_hosts -%>,
   "zk_path": "<%= @zk_path -%>",
   "check_interval": <%= @check_interval -%>,
-  "checks": <%= require "json"; JSON.generate @checks %>
+<% if !@labels.nil? && !@labels.empty? -%>
+  "labels": <%= JSON.generate(@labels) %>,
+<% end -%>
+  "checks": <%= JSON.generate(@checks) %>
 }
